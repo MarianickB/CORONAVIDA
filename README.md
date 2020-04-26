@@ -1,5 +1,7 @@
 # CORONAVIDA
-We present to you the code we have made. We did not make it in time to host a website on GitHub :( However, if you download the files to open in a text editor, or if you copy paste them directly onto files you create (with the same name as how we've named them) in a text editor, you should be able to test out our project! 
+We present to you the code we have made. We did not make it in time to host a website on GitHub :( Really sorry for the inconvenience!
+
+However, if you download the files to open in a text editor, or if you copy paste them directly onto files you create (with the same name as how we've named them) in a text editor, you should be able to test out our project! 
 
 For the website: 
 1. Open text editor (we used Atom because there's a live server plug-in called atom-live-server!)
