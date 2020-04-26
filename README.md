@@ -1,9 +1,9 @@
 # CORONAVIDA
-We present to you the code we have made. We did not make it in time to host a website on GitHub :( However, if you download the files and open them in a text editor, you should be able to test out our project! 
+We present to you the code we have made. We did not make it in time to host a website on GitHub :( However, if you download the files to open in a text editor, or if you copy paste them directly onto files you create (with the same name as how we've named them) in a text editor, you should be able to test out our project! 
 
 For the website: 
 1. Open text editor (we used Atom because there's a live server plug-in called atom-live-server!)
-2. Import files and store in same folder
+2. Import files and store in same folder OR create 4 different files with the same names of our files and copy the code in them respectively. 
 3. Make sure both .js files are in a "scripts" folder, inside the main folder.
 4. Use a live server to open project. 
 5. You will have a menu of the files.
