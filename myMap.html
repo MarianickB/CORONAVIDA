@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <title>My Map</title>
+  <style>
+    #map{
+      height:400px;
+      width:100%;
+    }
+    .button {
+    display: center;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .button:hover span {
+    padding-right: 25px;
+  }
+
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  </style>
+</head>
+<body class="grey lighten-3">
+  <nav class="z-depth-0 grey lighten-4">
+    <div class="nav-wrapper container">
+      <a href "#" class="brand-logo">
+        <img>
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li class="logged-in" style="display: none;">
+          <a href = "#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+        </li>
+        <li class="logged-in" style="display: none;">
+          <a href="#" class="grey-text" id="logout">Logout</a>
+        </li>
+        <li class="logged-out" style="display: none;">
+          <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+        </li>
+        <li class="logged-out" style="display: none;">
+          <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up</h4><br>
+      <form id="signup-form">
+      <!--  <div class="input-field">
+          <input type="text" id="signup-name" required />
+          <label for="signup-name">Name</label>
+        </div> -->
+        <div class="input-field">
+          <input type="email" id="signup-email" required />
+          <label for="signup-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Choose password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4><br>
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required/>
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required/>
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-account" class="modal">
+    <div class="modal-content center-align">
+      <h4>Account details</h4><br>
+      <div class="account-details"></div>
+    </div>
+  </div>
+
+  <h1 class="center-align" id="title">My Map</h1>
+  <h5 class="center-align" id="instructions">
+    Click on the map to add a location in which you have been in the last 14 days.<br>
+    You can drag the marker if you would like to modify the location of it.<br>
+    When you are done, click on submit and repeat the process, if you wish.
+    <br>
+    <br>
+  </h5>
+
+  <div id="map"></div><br><br>
+  <div id="button" class="right-align">
+    <button  onclick="fireStore(LatLong)" class="button" id="envoyer"><span>Envoyer</span></button>
+  </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+  <!-- <script type="text/javascript" src="js/authentication.js"></script> -->
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAIzgIxiVnhith5dzdMgHrovMG7afVwiCc",
+      authDomain: "grand-thought-274419.firebaseapp.com",
+      databaseURL: "https://grand-thought-274419.firebaseio.com",
+      projectId: "grand-thought-274419",
+      storageBucket: "grand-thought-274419.appspot.com",
+      messagingSenderId: "1042874944910",
+      appId: "1:1042874944910:web:8e2a21f4ea89241fe8a8df",
+      measurementId: "G-F9Q6XVP3GL"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    //make auth and firestore references
+    const auth=firebase.auth();
+    const db=firebase.firestore();
+  </script>
+
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/index.js"></script>
+
+  <script>
+
+  var LatLong=[];
+  var i=0;
+
+  function initMap(){
+    console.log("lol");
+    var options = {
+      zoom:11,
+      center:{lat:45.5017, lng:-73.5673}
+    }
+
+  var map = new google.maps.Map(document.getElementById('map'), options);
+
+  if(LatLong!=null){
+  for(var i=0; i<LatLong.length; i++){
+    var marker = new google.maps.Marker({
+      position: {lat: LatLong[i].lat, lng: LatLong[i].lon},
+      map:map,
+      editable:true,
+      draggable:true,
+    });
+    marker.setMap(map);
+  }}
+
+
+  // Configure the click listener.
+  map.addListener('click', function(mapsMouseEvent) {
+    var marker = new google.maps.Marker({
+      position: mapsMouseEvent.latLng,
+      map:map,
+      editable:true,
+      draggable:true,
+    });
+
+    LatLong.push({"lat":marker.getPosition().lat(), "lon":marker.getPosition().lng()});
+    marker.setMap(map);
+    marker.addListener('dragstart', changeLatLong);
+
+    function changeLatLong(event){
+        marker.addListener('dragend', function (changeLL) {
+          document.getElementById("newcoords").innerHTML = marker.getPosition();
+          LatLong[i-1]={"lat":marker.getPosition().lat(), "lon":marker.getPosition().lng()};
+          document.getElementById("array").innerHTML = LatLong[i];
+
+        });
+      }
+
+    i++;
+  });
+  }
+
+
+  function fireStore(arr) {
+    if (firebase.auth().currentUser != null ){
+      db.collection('users').doc(firebase.auth().currentUser.uid).set({
+      coords: arr
+      });
+    }
+
+  };
+
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIzgIxiVnhith5dzdMgHrovMG7afVwiCc&callback=initMap">
+    </script>
+  </body>
+</html>
